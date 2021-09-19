@@ -219,7 +219,7 @@ function toggleBtn(e) {
 function setDate() {
   const now = new Date();
   let calendarDate = `${now.getMonth()+1}/${now.getDate()}/${now.getFullYear()} `;
-  let time = `${now.getHours()}:${timePad(now.getMinutes())} `;
+  let time = `${now.getHours()}:${pad(now.getMinutes(), 2)} `;
   let punchDate = `punch date = ${time} ${calendarDate} ${now.getMonth()}`;
   console.log(now);
   console.log(calendarDate);
