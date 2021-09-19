@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DW-TimeTracker-JS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="workspace-wrapper">
+        <div class="add-proj-container input-container">
+            <h3>Add new project<button class='open-close-btn'><i class="fas fa-angle-double-down" aria-hidden="true"></i></button></h3>
+                <form id="form">
+                    <div class="form-control">
+                        <label for="employee">Employee</label>
+                        <input type="text" id="employee-name" placeholder="Employee initials...">
+                    </div>
+                    <div class="form-control">
+                        <label for="job-number">Job No#</label>
+                        <input type="text" id="job-no" placeholder="Enter job number...">
+                    </div>
+                    <div class="form-control">
+                        <label for="customer">Customer</label>
+                        <input type="text" id="customer" placeholder="Customer name...">
+                    </div>
+                    <div class="form-control">
+                        <label for="description">Job description/Note</label>
+                        <input type="text" id="job-desc" placeholder="Job Description...">
+                    </div>
+                    <div class ="custom-select">
+                        <label for="task">Task</label>
+                        <select id="task">
+                            <option value="0">Select Task:</option>
+                            <option value="1">Design</option>
+                            <option value="2">Engineering</option>
+                            <option value="3">Rendering</option>
+                            <option value="4">Production</option>
+                            <option value="5">Installation</option>
+                            <option value="6">Prototyping</option>
+                            <option value="7">Photography</option>
+                            <option value="8">Illustration</option>
+                            <option value="9">Meeting</option>
+                            <option value="o-10">Project Management</option>
+                        </select>
+                    </div>
+                    
+                    <button class="add-proj-btn"><img src="images/start_button_green.png" class="punch-img" alt="start "> Add and Begin Project</button>
+                </form>
+        </div>
+        <div class="container-card-lists">
+            <h3 class="time-list">Time punches<button class='open-close-btn' id="punch-open-close-btn"><i class="fas fa-angle-double-down" aria-hidden="true"></i></button></h3>
+            <ul class="dates" id="dates">
+                <li class="punch-date-container-open" id="current-day">
+                    <div class="day-heading">FRIDAY<span class=day>7/30/2021</span><button class="open-close-btn-small"><img src="images/switch_button_gray_on.png" alt="Hide-unhide punches button" aria-hidden="true"></button></div>
+                    <ul class="list">
+                        <li class="job-info-card"><div class="info">DW | DW-001 | OBDK</div><button class='start-stop-button'><img src="images/start_button_green.png" class="punch-img" alt="start " aria-hidden="true"></button><div class="start">18:00 7/30/21</div><div class="stop">19:00  7/30/21</div><div class="elapse"> > 1.00 h</div><br><div class="desc"> This is a description of the job</div><button class="delete-btn">x</button></li>
+                        <li class="job-info-card"><div class="info">DW | DW-001 | OBDK</div><button class='start-stop-button'><img src="images/start_button_green.png" class="punch-img" alt="start "></button><div class="start">18:00 7/30/21</div><div class="stop">19:00  7/30/21</div><div class="elapse"> > 1.00 h</div><br><div class="desc"> This is a description of the job</div><button class="delete-btn">x</button></li>
+                        <li class="job-info-card"><div class="info">DW | DW-001 | OBDK</div><button class='start-stop-button'><img src="images/start_button_green.png" class="punch-img" alt="start "></button><div class="start">18:00 7/30/21</div><div class="stop">19:00  7/30/21</div><div class="elapse"> > 1.00 h</div><br><div class="desc"> This is a description of the job</div><button class="delete-btn">x</button></li>
+                        <li class="job-info-card"><div class="info">DW | DW-001 | OBDK</div><button class='start-stop-button'><img src="images/start_button_green.png" class="punch-img" alt="start "></button><div class="start">18:00 7/30/21</div><div class="stop">19:00  7/30/21</div><div class="elapse"> > 1.00 h</div><br><div class="desc"> This is a description of the job</div><button class="delete-btn">x</button></li>
+                        <li class="job-info-card"><div class="info">DW | DW-001 | OBDK</div><button class='start-stop-button'><img src="images/start_button_green.png" class="punch-img" alt="start "></button><div class="start">18:00 7/30/21</div><div class="stop">19:00  7/30/21</div><div class="elapse"> > 1.00 h</div><br><div class="desc"> This is a description of the job</div><button class="delete-btn">x</button></li>
+                    </ul>
+                </li>
+                <li class="punch-date-container-closed" id="current-day-minus-one">
+                    <div class="day-heading">THURSDAY<span class=day>7/29/2021</span><button class="open-close-btn-small"><img src="images/switch_button_gray_off.png" alt="Hide-unhide punches button" aria-hidden="true"></button></div>
+                    <ul class="list">
+                        <li class="job-info-card"><div class="info">DW | DW-001 | OBDK</div><button class="punch"><i class="fas fa-angle-double-right" aria-hidden="true"></i></button><div class="start">18:00  7/29/21</div><div class="stop">19:00  7/29/21</div><div class="elapse"> > 1.00 h</div><br><div class="desc"> This is a description of the job</div><button class="delete-btn">x</button></li>
+                        <li class="job-info-card"><div class="info">DW | DW-001 | OBDK</div><button class="punch"><i class="fas fa-angle-double-right" aria-hidden="true"></i></button><div class="start">18:00  7/29/21</div><div class="stop">19:00  7/29/21</div><div class="elapse"> > 12.00 h</div><br><div class="desc"> This is a description of the job</div><button class="delete-btn">x</button></li>
+                    </ul>
+                </li>
+                <li class="punch-date-container-closed" id="current-day-minus-two">
+                    <div class="day-heading">WEDNESDAY<span class=day>7/28/2021</span><button class="open-close-btn-small"><img src="images/switch_button_gray_off.png" alt="Hide-unhide punches button" aria-hidden="true"></button></div>
+                    <ul class="list">
+                        <li class="job-info-card"><div class="info">DW | DW-001 | OBDK</div><button class="punch"><i class="fas fa-angle-double-right" aria-hidden="true"></i></button><div class="start">18:00  7/29/21</div><div class="stop">19:00  7/29/21</div><div class="elapse"> > 1.00 h</div><br><div class="desc"> This is a description of the job</div><button class="delete-btn">x</button></li>
+                        <li class="job-info-card"><div class="info">DW | DW-001 | OBDK</div><button class="punch"><i class="fas fa-angle-double-right" aria-hidden="true"></i></button><div class="start">18:00  7/29/21</div><div class="stop">19:00  7/29/21</div><div class="elapse"> > 12.00 h</div><br><div class="desc"> This is a description of the job</div><button class="delete-btn">x</button></li>
+                    </ul>
+                </li>
+            
+        </div>
+        <div class="list-wrapper">
+            <div class="grid-header">
+                <div class="">EMP</div>
+                <div class="">Job#</div>
+                <div class="">Client</div>
+                <div class="">Task</div>
+                <div class="">Start</div>
+                <div class="">Stop</div>
+                <div class="">Total</div>
+                <div style="font-size:14px; padding-left:10px; padding-top:3px">+/-</div>
+                <div class="">Description/Note</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe the task and write notes This is the area where you describe the task and write notes</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe the task and write notes This is the area where you describe the task and write notes</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe the task and write notes This is the area where you describe the task and write notes</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe the task and write notes This is the area where you describe the task and write notes</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe the task and write notes This is the area where you describe the task and write notes</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe the task and write notes This is the area where you describe the task and write notes</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe the task and write notes This is the area where you describe the task and write notes</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe the task and write notes This is the area where you describe the task and write notes</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe the task and write notes This is the area where you describe the task and write notes</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe the task and write notes This is the area where you describe the task and write notes</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe the task and write notes This is the area where you describe the task and write notes</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe the task and write notes This is the area where you describe the task and write notes</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe the task and write notes This is the area where you describe the task and write notes</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe the task and write notes This is the area where you describe the task and write notes</div>
+            </div>
+            <div class="inner-grid">
+                <div class="">DW</div>
+                <div class="">10999</div>
+                <div class="">NFS UNITE</div>
+                <div class="">Engineering</div>
+                <div class="">18:00 12/29/21</div>
+                <div class="">22:00 12/29/21</div>
+                <div class="">24:00 h</div>
+                <div class="">0:00</div>
+                <div class="">This is the area where you describe the task and write notes This is the area where you describe the task and write notes</div>
+            </div>
+            
+            
+    
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
