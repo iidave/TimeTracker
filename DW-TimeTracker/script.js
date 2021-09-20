@@ -97,7 +97,7 @@ function addPunches(e) {
   let calendarDate = `${now.getMonth()+1}/${now.getDate()}/${now.getFullYear()} `;
   let punchDate = `${time} ${calendarDate}`;
 
-  if($employee.value.trim() === '' || $jobNo.value.trim() === '') {
+  if($employee.value.trim() === '' || $jobNo.value.trim() === ''|| $customer.value.trim() === '' || $task.value.trim() === '' || $jobDesc.value.trim() === '' || $task.value.trim() === '') {
     alert('Please add all job info before adding punch')
   } else {
     const punch = {
@@ -123,33 +123,34 @@ function addPunches(e) {
 }
 
 //Add punches to DOM List
-function addPunchesDOM(punch) {
-  const startPunch = new Date(punch.start);
-  const startPunchMilli = startPunch.getTime();
-  const endPunch = new Date(punch.end);
-  const endPunchMilli = endPunch.getTime();
+//Keep fore reference
+// function addPunchesDOM(punch) {
+//   const startPunch = new Date(punch.start);
+//   const startPunchMilli = startPunch.getTime();
+//   const endPunch = new Date(punch.end);
+//   const endPunchMilli = endPunch.getTime();
 
-  let elapsed = endPunchMilli - startPunchMilli;
+//   let elapsed = endPunchMilli - startPunchMilli;
 
-  const daysElapsed = Math.floor(elapsed/1000/60/60/24);
-  elapsed -= daysElapsed*1000*60*60*24;
+//   const daysElapsed = Math.floor(elapsed/1000/60/60/24);
+//   elapsed -= daysElapsed*1000*60*60*24;
   
-  const hoursElapsed = Math.floor(elapsed/1000/60/60);
-  elapsed -= hoursElapsed*1000*60*60;
+//   const hoursElapsed = Math.floor(elapsed/1000/60/60);
+//   elapsed -= hoursElapsed*1000*60*60;
   
-  const minutesElapsed = Math.floor(elapsed/1000/60);
-  elapsed -= minutesElapsed*1000*60;
+//   const minutesElapsed = Math.floor(elapsed/1000/60);
+//   elapsed -= minutesElapsed*1000*60;
 
-  const elapsedTotal = `${(daysElapsed*24)+hoursElapsed}:${pad(minutesElapsed, 2)}h`
+//   const elapsedTotal = `${(daysElapsed*24)+hoursElapsed}:${pad(minutesElapsed, 2)}h`
 
-  const item = document.createElement('li');
+//   const item = document.createElement('li');
 
-  item.classList.add('job-info-card');
+//   item.classList.add('job-info-card');
 
-  item.innerHTML = `<div class="info">${punch.employee} | ${punch.jobNo} | ${punch.cust}</div><button class='start-stop-button'><img src="images/stop_button_red.png" class="punch-img" alt="stop" aria-hidden="true"></button><div class="start">${punch.start}</div><div class="stop">${punch.end}</div><div class="elapse"> > ${elapsedTotal}</div><br><div class="desc">DESC: ${punch.desc}&nbsp &nbsp |&nbsp &nbsp NOTES: ${punch.notes}</div><button class="delete-btn">x</button>`
+//   item.innerHTML = `<div class="info">${punch.employee} | ${punch.jobNo} | ${punch.cust}</div><button class='start-stop-button'><img src="images/stop_button_red.png" class="punch-img" alt="stop" aria-hidden="true"></button><div class="start">${punch.start}</div><div class="stop">${punch.end}</div><div class="elapse"> > ${elapsedTotal}</div><br><div class="desc">DESC: ${punch.desc}&nbsp &nbsp |&nbsp &nbsp NOTES: ${punch.notes}</div><button class="delete-btn">x</button>`
 
-  $punchDayList.appendChild(item);
-}
+//   $punchDayList.appendChild(item);
+// }
 
 //Leading Zero to number
 //https://stackoverflow.com/questions/2998784/how-to-output-numbers-with-leading-zeros-in-javascript
