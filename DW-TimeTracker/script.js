@@ -1,4 +1,3 @@
-
 //Form inputs
 const $employee = document.getElementById('employee');
 const $jobNo = document.getElementById('job-no');
@@ -8,7 +7,7 @@ const $jobDesc = document.getElementById('job-desc');
 const $form = document.getElementById('form');
 
 //List elements
-// const $list = document.getElementById('day-list'); 
+// const $list = document.getElementById('day-list');
 //Above Removed from DOM for now
 
 //Containers and Wrappers
@@ -16,13 +15,14 @@ const $addProjContainer = document.querySelector('.add-proj-container');
 const $containerCardLists = document.querySelector('.container-card-lists');
 const $datesList = document.querySelector('.dates');
 const $punchDayList = document.querySelector('.list');
-const $punchDateContainer = document.getElementById('punch-date-container-open');
+const $punchDateContainer = document.getElementById(
+  'punch-date-container-open'
+);
 
 //Buttons
 const $openCloseBtn = document.querySelector('.open-close-btn');
 const $punchOpenCloseBtn = document.getElementById('punch-open-close-btn');
 const $addProjBtn = document.querySelector('.add-proj-btn');
-
 
 //Dummy punches
 const dummyPunches = [
@@ -84,35 +84,73 @@ const dummyPunches = [
 ];
 const localStoragePunches = JSON.parse(localStorage.getItem('punches'));
 
-let punches = 
-localStorage.getItem('punches') !== null ? localStoragePunches : [];
+let punches =
+  localStorage.getItem('punches') !== null ? localStoragePunches : [];
+
+//Current Date
+const now = new Date();
+const days = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+const day = days[now.getDay()];
+const month = months[now.getMonth()];
+
+let time = `${now.getHours()}:${pad(now.getMinutes(), 2)} `;
+let calendarDate = `${
+  now.getMonth() + 1
+}/${now.getDate()}/${now.getFullYear()} `;
+let punchDate = `${time} ${calendarDate}`;
 
 //Add transaction to array of Punches
 function addPunches(e) {
   e.preventDefault();
 
-  //How do I make this a function and use the data?
-  const now = new Date();
-  let time = `${now.getHours()}:${pad(now.getMinutes(), 2)} `;
-  let calendarDate = `${now.getMonth()+1}/${now.getDate()}/${now.getFullYear()} `;
-  let punchDate = `${time} ${calendarDate}`;
-
-  if($employee.value.trim() === '' || $jobNo.value.trim() === ''|| $customer.value.trim() === '' || $task.value.trim() === '' || $jobDesc.value.trim() === '' || $task.value.trim() === '') {
-    alert('Please add all job info before adding punch')
+  if (
+    $employee.value.trim() === '' ||
+    $jobNo.value.trim() === '' ||
+    $customer.value.trim() === '' ||
+    $task.value.trim() === '' ||
+    $jobDesc.value.trim() === '' ||
+    $task.value.trim() === ''
+  ) {
+    alert('Please add all job info before adding punch');
   } else {
     const punch = {
       id: 1,
-    employee: $employee.value,
-    jobNo: $jobNo.value,
-    cust: $customer.value,
-    task: $task.value,
-    notes: $jobDesc.value,
-    start: `${punchDate}`,
-    end: '',
+      employee: $employee.value,
+      jobNo: $jobNo.value,
+      cust: $customer.value,
+      task: $task.value,
+      notes: $jobDesc.value,
+      start: `${punchDate}`,
+      end: '',
     };
 
     punches.push(punch);
     console.log(punches);
+
+    addPunchDOM(punch);
 
     $employee.value = '';
     $jobNo.value = '';
@@ -122,8 +160,8 @@ function addPunches(e) {
   }
 }
 
-//Add punches to DOM List
-//Keep fore reference
+//Add punches to DOM List -- THIS ONE DID NOT WORK -- Try again below
+//Keep for reference
 // function addPunchesDOM(punch) {
 //   const startPunch = new Date(punch.start);
 //   const startPunchMilli = startPunch.getTime();
@@ -134,10 +172,10 @@ function addPunches(e) {
 
 //   const daysElapsed = Math.floor(elapsed/1000/60/60/24);
 //   elapsed -= daysElapsed*1000*60*60*24;
-  
+
 //   const hoursElapsed = Math.floor(elapsed/1000/60/60);
 //   elapsed -= hoursElapsed*1000*60*60;
-  
+
 //   const minutesElapsed = Math.floor(elapsed/1000/60);
 //   elapsed -= minutesElapsed*1000*60;
 
@@ -152,11 +190,27 @@ function addPunches(e) {
 //   $punchDayList.appendChild(item);
 // }
 
+// Add punches to DOM List
+function addPunchDOM(punch) {
+  //Get punch date to determine where generated li is to be added in organized list
+  const listDate = document.createElement('li');
+  let punchListDate = calendarDate;
+
+  listDate.classList.add('punch-date-container-open');
+  listDate.innerHTML = `<div class="day-heading">${day}<span class="day">${punchListDate}</span><button class="open-close-btn-small"><img src="images/switch_button_gray_on.png" alt="Hide-unhide punches button" aria-hidden="true"></button></div>`;
+
+  $datesList.appendChild(listDate);
+
+  // const item = document.createElement('li');
+
+  // item.classList.add('job-info-card');
+}
+
 //Leading Zero to number
 //https://stackoverflow.com/questions/2998784/how-to-output-numbers-with-leading-zeros-in-javascript
 function pad(num, size) {
   num = num.toString();
-  while (num.length < size) num = "0" + num;
+  while (num.length < size) num = '0' + num;
   return num;
 }
 
@@ -166,13 +220,14 @@ function pad(num, size) {
 
 //Find Day and add UL to DOM
 function createDayList() {
-  const day = punches.map(localStoragePunches => 
-    `${new Date(localStoragePunches.start).getMonth()+1}/
+  const day = punches.map(
+    (localStoragePunches) =>
+      `${new Date(localStoragePunches.start).getMonth() + 1}/
     ${new Date(localStoragePunches.start).getDate()}/
     ${new Date(localStoragePunches.start).getFullYear()}`
-    );
+  );
   console.log(day);
-};
+}
 //Below is temporary and needs to be removed
 createDayList();
 //Create unique ID see article
@@ -198,20 +253,19 @@ function openClosePunchList() {
 
 //Open and close THIS Dates-List
 const $dayOpenCloseBtn = document.querySelectorAll('.open-close-btn-small');
-$dayOpenCloseBtn.forEach(function(ele) {
-  ele.addEventListener('click', toggleBtn)
-})
+$dayOpenCloseBtn.forEach(function (ele) {
+  ele.addEventListener('click', toggleBtn);
+});
 
 function toggleBtn(e) {
   this.parentNode.parentNode.classList.toggle('punch-date-container-closed');
   let swapBtn = e.target;
   console.log('btn ', swapBtn);
-  if(swapBtn.src.match('switch_button_gray_on.png')) {
+  if (swapBtn.src.match('switch_button_gray_on.png')) {
     swapBtn.src = 'images/switch_button_gray_off.png';
   } else {
     swapBtn.src = 'images/switch_button_gray_on.png';
   }
-  
 }
 
 //Set Date function
@@ -219,7 +273,9 @@ function toggleBtn(e) {
 //https://www.aspsnippets.com/Articles/JavaScript-Display-Current-Time-in-12-hour-format-AM-PM-and-24-hour-format-with-Hours-Minutes-and-Seconds-hhmmss.aspx
 function setDate() {
   const now = new Date();
-  let calendarDate = `${now.getMonth()+1}/${now.getDate()}/${now.getFullYear()} `;
+  let calendarDate = `${
+    now.getMonth() + 1
+  }/${now.getDate()}/${now.getFullYear()} `;
   let time = `${now.getHours()}:${pad(now.getMinutes(), 2)} `;
   let punchDate = `punch date = ${time} ${calendarDate} ${now.getMonth()}`;
   console.log(now);
@@ -230,19 +286,19 @@ function setDate() {
 
 //Start and Stop THIS time punch
 const $startStopBtn = document.querySelectorAll('.start-stop-button');
-$startStopBtn.forEach(function(ele) {
+$startStopBtn.forEach(function (ele) {
   console.log(ele);
-  ele.addEventListener('click', StartStopBtn)
-})
+  ele.addEventListener('click', StartStopBtn);
+});
 
 function StartStopBtn(e) {
   let swapBtn = e.target;
-  if(swapBtn.src.match('start_button_green.png')) {
+  if (swapBtn.src.match('start_button_green.png')) {
     swapBtn.src = 'images/stop_button_red.png';
   } else {
     swapBtn.src = 'images/start_button_green.png';
   }
-  
+
   setDate();
 }
 
@@ -254,7 +310,7 @@ function uniqueID() {
 }
 
 //Init app
-// This section is still in the works-------------------------
+// This section is still WIP-------------------------
 function init() {
   $punchDayList.innerHTML = '';
 
