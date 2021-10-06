@@ -87,7 +87,7 @@ const localStoragePunches = JSON.parse(localStorage.getItem('punches'));
 let punches =
   localStorage.getItem('punches') !== null ? localStoragePunches : [];
 
-//Current Date
+//Current Date and time
 const now = new Date();
 const days = [
   'Sunday',
@@ -160,36 +160,6 @@ function addPunches(e) {
   }
 }
 
-//Add punches to DOM List -- THIS ONE DID NOT WORK -- Try again below
-//Keep for reference
-// function addPunchesDOM(punch) {
-//   const startPunch = new Date(punch.start);
-//   const startPunchMilli = startPunch.getTime();
-//   const endPunch = new Date(punch.end);
-//   const endPunchMilli = endPunch.getTime();
-
-//   let elapsed = endPunchMilli - startPunchMilli;
-
-//   const daysElapsed = Math.floor(elapsed/1000/60/60/24);
-//   elapsed -= daysElapsed*1000*60*60*24;
-
-//   const hoursElapsed = Math.floor(elapsed/1000/60/60);
-//   elapsed -= hoursElapsed*1000*60*60;
-
-//   const minutesElapsed = Math.floor(elapsed/1000/60);
-//   elapsed -= minutesElapsed*1000*60;
-
-//   const elapsedTotal = `${(daysElapsed*24)+hoursElapsed}:${pad(minutesElapsed, 2)}h`
-
-//   const item = document.createElement('li');
-
-//   item.classList.add('job-info-card');
-
-//   item.innerHTML = `<div class="info">${punch.employee} | ${punch.jobNo} | ${punch.cust}</div><button class='start-stop-button'><img src="images/stop_button_red.png" class="punch-img" alt="stop" aria-hidden="true"></button><div class="start">${punch.start}</div><div class="stop">${punch.end}</div><div class="elapse"> > ${elapsedTotal}</div><br><div class="desc">DESC: ${punch.desc}&nbsp &nbsp |&nbsp &nbsp NOTES: ${punch.notes}</div><button class="delete-btn">x</button>`
-
-//   $punchDayList.appendChild(item);
-// }
-
 // Add punches to DOM List
 function addPunchDOM(punch) {
   //Get punch date to determine where generated li is to be added in organized list
@@ -226,7 +196,7 @@ function createDayList() {
     ${new Date(localStoragePunches.start).getDate()}/
     ${new Date(localStoragePunches.start).getFullYear()}`
   );
-  console.log(day);
+  console.log('createDayList function ', day.value);
 }
 //Below is temporary and needs to be removed
 createDayList();
@@ -247,7 +217,6 @@ function openCloseContainer() {
 
 //Open and close Time Punch window
 function openClosePunchList() {
-  console.log('close');
   $containerCardLists.classList.toggle('container-card-lists-closed');
 }
 
@@ -278,9 +247,7 @@ function setDate() {
   }/${now.getDate()}/${now.getFullYear()} `;
   let time = `${now.getHours()}:${pad(now.getMinutes(), 2)} `;
   let punchDate = `punch date = ${time} ${calendarDate} ${now.getMonth()}`;
-  console.log(now);
-  console.log(calendarDate);
-  console.log(time);
+  console.log('punchDate value= ', punchDate);
   console.log('Time is:', time, calendarDate, now.getMonth());
 }
 
