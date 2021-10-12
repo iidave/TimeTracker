@@ -34,11 +34,12 @@ body {
   grid-template-areas:
     'apc ccl'
     'lw lw';
+    /*apc = Add-project-card  ccl = container-card-lists lw = list-wrapper*/
   width: 90%;
   gap: 10px;
   filter: drop-shadow(1px 1px 1px var(--mid-gray));
-  /* border: 1px solid var(--mid-gray);
-  padding: 0 10px 5px 5px; */
+  border: 1px solid var(--mid-gray);
+  padding: 0 10px 5px 5px;
 }
 /*container styles section --------------*/
 

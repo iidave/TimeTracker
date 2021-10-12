@@ -211,8 +211,15 @@ function addProjectToArray() {
 }
 
 //Open and close Add new project window
-function openCloseContainer() {
+function openCloseContainer(e) {
   $addProjContainer.classList.toggle('add-proj-container-closed');
+  let arrowChild = $openCloseBtn.children;
+  let click = e.target;
+  console.log(click);
+  console.log(arrowChild);
+  //need to figure out how to change classList of Child arrow toggle up or down arrow
+  //not working yet
+  arrowChild.classList.toggle('fas fa-angle-double-down');
 }
 
 //Open and close Time Punch window
