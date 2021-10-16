@@ -209,17 +209,18 @@ createDayList();
 function addProjectToArray() {
   $addProjBtn.addEventListener('click', addProjToList);
 }
+//Open and Close Project or Time Punches Container and switch icon up or down
+const $openCloseContainer = document.querySelectorAll('.open-close-btn');
+$openCloseContainer.forEach(function (ele) {
+  ele.addEventListener('click', toggleIcon);
+});
 
-//Open and close Add new project window
-function openCloseContainer(e) {
-  $addProjContainer.classList.toggle('add-proj-container-closed');
-  let arrowChild = $openCloseBtn.children;
-  let click = e.target;
-  console.log(click);
-  console.log(arrowChild);
-  //need to figure out how to change classList of Child arrow toggle up or down arrow
-  //not working yet
-  arrowChild.classList.toggle('fas fa-angle-double-down');
+function toggleIcon(e) {
+  this.parentNode.parentNode.classList.toggle('add-proj-container-closed');
+  let swapIcon = e.target;
+  console.log(e.target.classList.value);
+  console.log('btnSelect ', swapIcon);
+  e.target.classList.toggle('fa-angle-double-up');
 }
 
 //Open and close Time Punch window
@@ -237,10 +238,10 @@ function toggleBtn(e) {
   this.parentNode.parentNode.classList.toggle('punch-date-container-closed');
   let swapBtn = e.target;
   console.log('btn ', swapBtn);
-  if (swapBtn.src.match('switch_button_gray_on.png')) {
+  if (swapBtn.src.match('switch_button_purple_on.png')) {
     swapBtn.src = 'images/switch_button_gray_off.png';
   } else {
-    swapBtn.src = 'images/switch_button_gray_on.png';
+    swapBtn.src = 'images/switch_button_purple_on.png';
   }
 }
 
@@ -295,7 +296,7 @@ function init() {
 init();
 
 // EventListeners
-$openCloseBtn.addEventListener('click', openCloseContainer);
+// $openCloseBtn.addEventListener('click', openCloseContainer);
 $punchOpenCloseBtn.addEventListener('click', openClosePunchList);
 $form.addEventListener('submit', addPunches);
 
