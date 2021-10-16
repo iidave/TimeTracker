@@ -210,6 +210,8 @@ function addProjectToArray() {
   $addProjBtn.addEventListener('click', addProjToList);
 }
 //Open and Close Project or Time Punches Container and switch icon up or down
+//NOTE: if you click on the outer edge of button, icon gets toggled to ::before
+// Not sure how to fix that. Must be selection related TBD
 const $openCloseContainer = document.querySelectorAll('.open-close-btn');
 $openCloseContainer.forEach(function (ele) {
   ele.addEventListener('click', toggleIcon);
@@ -281,7 +283,7 @@ function StartStopBtn(e) {
 //This needs to be figured out
 function uniqueID() {
   let x = 1;
-  const uID = x++;
+  let uID = x++;
 }
 
 //Init app
