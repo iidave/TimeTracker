@@ -122,6 +122,14 @@ let calendarDate = `${
 }/${now.getDate()}/${now.getFullYear()} `;
 let punchDate = `${time} ${calendarDate}`;
 
+//Leading Zero to number
+//https://stackoverflow.com/questions/2998784/how-to-output-numbers-with-leading-zeros-in-javascript
+function pad(num, size) {
+  num = num.toString();
+  while (num.length < size) num = '0' + num;
+  return num;
+}
+
 //Add transaction to array of Punches
 function addPunches(e) {
   e.preventDefault();
@@ -176,13 +184,6 @@ function addPunchDOM(punch) {
   // item.classList.add('job-info-card');
 }
 
-//Leading Zero to number
-//https://stackoverflow.com/questions/2998784/how-to-output-numbers-with-leading-zeros-in-javascript
-function pad(num, size) {
-  num = num.toString();
-  while (num.length < size) num = '0' + num;
-  return num;
-}
 
 //Calculate Elapsed Time
 // Code reference
@@ -220,7 +221,6 @@ $openCloseContainer.forEach(function (ele) {
 function toggleIcon(e) {
   this.parentNode.parentNode.classList.toggle('add-proj-container-closed');
   let swapIcon = e.target;
-  console.log(e.target.classList.value);
   console.log('btnSelect ', swapIcon);
   e.target.classList.toggle('fa-angle-double-up');
 }
